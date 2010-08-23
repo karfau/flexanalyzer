@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="FlexAnalyzer"
+            id="de.karfau.flex_analyzer.category">
+      </category>
+      <view
+            name="Sequence"
+            icon="icons/sample.gif"
+            category="de.karfau.flex_analyzer.category"
+            class="de.karfau.flex_analyzer.ui.views.SequenceView"
+            id="de.karfau.flex_analyzer.ui.views.SequenceView">
+      </view>
+   </extension>
+
+</plugin>

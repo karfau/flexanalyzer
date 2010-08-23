@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: de.karfau.flex_analyzer.ui.test; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.karfau.flex_analyzer.ui.test.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.platform;bundle-version="3.3.202",
+ de.karfau.flex_analyzer.ui;bundle-version="1.0.0",
+ de.karfau.flex_analyzer.model.dummy;bundle-version="1.0.0",
+ org.eclipse.swtbot.eclipse.core;bundle-version="2.0.0",
+ org.eclipse.swtbot.eclipse.finder;bundle-version="2.0.0",
+ org.eclipse.swtbot.swt.finder;bundle-version="2.0.0",
+ org.junit4;bundle-version="4.5.0",
+ org.hamcrest;bundle-version="1.1.0",
+ org.apache.log4j;bundle-version="1.2.13",
+ org.eclipse.swtbot.junit4_x;bundle-version="2.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: de.karfau.flex_analyzer.ui.test
