@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" creationComplete="application1_creationCompleteHandler(event)">
+	<fx:Declarations>
+		<!-- Platzieren Sie nichtvisuelle Elemente (z. B. Dienste, Wertobjekte) hier -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import de.karfau.test.MyClass;
+			
+			import mx.events.FlexEvent;
+
+
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				var ole:String = "olé";
+				var test:MyClass = new MyClass(1, 2, ole);
+				test.test = "Hello World";
+				trace(test.test);
+				if (true) {
+					trace();
+				} else if (false) {
+					trace();
+				} else {
+					trace();
+				}
+			}
+
+		]]>
+	</fx:Script>
+</s:Application>

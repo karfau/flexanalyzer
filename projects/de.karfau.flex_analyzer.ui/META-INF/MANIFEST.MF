@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: FlexAnalyzer UI
+Bundle-SymbolicName: de.karfau.flex_analyzer.ui; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.karfau.flex_analyzer.ui.Activator
+Require-Bundle: org.eclipse.ui;visibility:=reexport,
+ org.eclipse.core.runtime;visibility:=reexport,
+ de.karfau.flex_analyzer.model;bundle-version="1.0.0";visibility:=reexport,
+ org.eclipse.ui.views;bundle-version="3.4.1";visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: de.karfau.flex_analyzer.ui.views

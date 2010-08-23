@@ -1,0 +1,61 @@
+
+########################
+
+MS-I: Exposé
+kurze Beschreibung der Projektidee (etwa 1 Seite)
+unbenotet, jedoch obligatorisch
+Abgabetermin: 30.04.2010, 23.55 Uhr
+
+########################
+
+MS-II: Projektplanung
+Umfang etwa 2-3 Seiten je Team
+Projektplanung besteht aus
+	grober Zeitplanung inkl. Meilensteinen
+	Aufgabenverteilung im Team
+unbenotet, jedoch obligatorisch
+Abgabetermin: 21.05.2010, 23.55 Uhr
+
+########################
+
+MS-III: Präsentation
+Präsentation - je Team ca. 20-30 Minuten
+anschließend Zeit für Diskussion / Fragen 15 Minuten
+Termine werden individuell abgestimmt, etwa ab KW 22
+geht mit 20% in die Bewertung ein
+
+########################
+
+MS-IV: Dokumentation
+je Teilnehmer etwa 2-3 Seiten
+Abgabetermin: 25.07.2010, 23.55 Uhr
+sobald der 2. Prüfungszeitraum feststeht ist eine
+Verlängerung des Termins zum 2. Prüfungszeitraum
+möglich
+geht mit 20% in die Bewertung ein
+
+########################
+
+Bewertung
+Projekt (60%) + Präsentation (20%) + Dokumentation (20%)
+Insgesamt 4 Meilensteine:
+	MS-I: Projektexposé bzw. -beschreibung
+	MS-II: Projektplanung bestehend aus grober Meilenstein- / Zeitplanung und Aufgabenverteilung
+	MS-III: Präsentation
+	MS-IV: Projektdokumentation
+
+Bewertungskriterien
+	50 Punkte je Übung / Meilenstein
+		Lösung ohne Mängel: 40 Punkte (2.0)
+		weitere 10 Punkte durch Zusatzleistungen
+	Grundlage für Punktevergabe:
+		Einhalten von Fälligkeiten
+		Erfüllen der Anforderungen
+		Zusatzleistungen
+	
+	Fälligkeiten sind unbedingt einzuhalten:
+		Abgabe ausschließlich per moodle (nicht per E-Mail)
+		maximal eine Datei (nach Möglichkeit pdf/zip)
+		bis zum Fälligkeitstermin: mehrfache Abgabe möglich
+		bis 10 Tage nach Fälligkeitstermin: 1 Punkt Abzug/Tag
+		Ausnahme: nicht Verfügbarkeit von moodle von mehr als 12 Stunden / Krankheit

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="open.builder.CodeModelViewer"
+            name="Code Model Utilities">
+      </category>
+      <view
+            category="open.builder.CodeModelViewer"
+            class="open.builder.codemodelviewer.ui.treeviewer.CMTreeViewer"
+            id="open.builder.codemodelviewer.ui.CMTreeViewer"
+            name="Tree Viewer">
+      </view>
+   </extension>
+
+</plugin>
