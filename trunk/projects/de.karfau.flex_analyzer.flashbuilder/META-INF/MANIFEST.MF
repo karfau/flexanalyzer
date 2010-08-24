@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Flashbuilder
+Bundle-SymbolicName: de.karfau.flex_analyzer.flashbuilder;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.karfau.flex_analyzer.flashbuilder.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ de.karfau.flex_analyzer.ui;bundle-version="1.0.0",
+ com.adobe.flexbuilder.editorcore;bundle-version="4.0.0",
+ com.adobe.flexide.editorcore;bundle-version="4.0.0",
+ de.karfau.flex_analyzer.model;bundle-version="1.0.0",
+ de.karfau.flex_analyzer.model.flashbuilder;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
