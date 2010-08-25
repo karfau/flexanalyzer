@@ -16,5 +16,25 @@
             id="de.karfau.flex_analyzer.ui.views.SequenceView">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:de.karfau.flex_analyzer.ui.views.SequenceView">
+         <command
+               commandId="de.karfau.flex_analyzer.ui.commands.SomeCommand"
+               icon="icons/sample.gif"
+               label="someCommand"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="de.karfau.flex_analyzer.ui.commands.SomeCommand"
+            id="de.karfau.flex_analyzer.ui.commands.SomeCommand"
+            name="SomeCommand">
+      </command>
+   </extension>
 
 </plugin>
