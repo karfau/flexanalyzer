@@ -39,7 +39,7 @@
    <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
-            adaptableType="org.eclipse.jface.viewers.ISelection"
+            adaptableType="org.eclipse.jface.text.TextSelection"
             class="de.karfau.flex_analyzer.model.flashbuilder.FBAdapterFactory">
          <adapter
                type="de.karfau.flex_analyzer.model.IAsFunction">
