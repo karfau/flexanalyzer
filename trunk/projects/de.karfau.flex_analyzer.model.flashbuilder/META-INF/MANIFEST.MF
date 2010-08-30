@@ -11,7 +11,15 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jface;bundle-version="3.5.2",
  com.adobe.flexbuilder.editors.derived;bundle-version="4.0.0";visibility:=reexport,
  com.adobe.flexide.as.core;bundle-version="4.0.0",
- com.adobe.flexide.editorcore;bundle-version="4.0.0"
+ com.adobe.flexbuilder.editorcore;bundle-version="4.0.0",
+ com.adobe.flexide.editorcore;bundle-version="4.0.0",
+ com.adobe.flexide.mxml.core;bundle-version="4.0.0",
+ com.adobe.model.core;bundle-version="1.0.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: de.karfau.flex_analyzer.model.flashbuilder
+Export-Package: de.karfau.flex_analyzer.model.flashbuilder;
+  uses:="org.eclipse.core.runtime,
+   de.karfau.flex_analyzer.model,
+   org.eclipse.jface.viewers,
+   org.osgi.framework,
+   com.adobe.flexbuilder.codemodel.definitions"
