@@ -1,22 +1,29 @@
 package de.karfau.flex_analyzer.model.flashbuilder;
 
 import org.eclipse.core.runtime.IAdapterFactory;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.ui.views.properties.IPropertySource;
 
+import com.adobe.flexbuilder.codemodel.common.CMFactory;
 import com.adobe.flexbuilder.codemodel.definitions.IDefinition;
 import com.adobe.flexbuilder.codemodel.definitions.IDefinitionLink;
 import com.adobe.flexbuilder.codemodel.definitions.IFunction;
+import com.adobe.flexbuilder.codemodel.project.IProject;
+import com.adobe.flexbuilder.codemodel.tree.ASOffsetInformation;
+import com.adobe.flexbuilder.codemodel.tree.IASNode;
+import com.adobe.flexbuilder.codemodel.tree.IFileNode;
 import com.adobe.flexbuilder.editors.derived.ui.navigator.IFlexPackageExplorerASOutlineContent;
 import com.adobe.flexide.as.core.ui.outliner.LinkableActionScriptTreeElement;
 
 import de.karfau.flex_analyzer.model.AccessModifiers;
+import de.karfau.flex_analyzer.model.Activator;
 import de.karfau.flex_analyzer.model.FunctionPropertySource;
 import de.karfau.flex_analyzer.model.IAsFunction;
 
 public class FBAdapterFactory implements IAdapterFactory {
 
-	private final Class<?>[] ADAPTER_TYPES = { IPropertySource.class };
+	private final Class<?>[] ADAPTER_TYPES = { IAsFunction.class, IPropertySource.class };
 
 	public static FBAsFunction function;
 
@@ -24,6 +31,7 @@ public class FBAdapterFactory implements IAdapterFactory {
 
 		function = new FBAsFunction(new FBASClass("DisplayObject", "flash.display"), AccessModifiers.PUBLIC, "addElement");
 		System.out.println("FBAdapterFactory created");
+		Activator.getSharedInstance().setAdapterFactory(this);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -31,24 +39,40 @@ public class FBAdapterFactory implements IAdapterFactory {
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		System.out.println(this.getClass().getSimpleName() + ".getAdapter(" + adaptableObject.getClass().getName() + ", " + adapterType.getSimpleName() + ")");
 
-		LinkableActionScriptTreeElement late = null;
-		if(adaptableObject instanceof LinkableActionScriptTreeElement)
-			late = (LinkableActionScriptTreeElement) adaptableObject;
+		/*
+		 * resolve a definition from adaptableObject
+		 */
+		IDefinition definition = null;
+
+		if (adaptableObject instanceof LinkableActionScriptTreeElement)
+			definition = getDefinition((LinkableActionScriptTreeElement) adaptableObject);
 		else if (adaptableObject instanceof IFlexPackageExplorerASOutlineContent) {
 			if (((IFlexPackageExplorerASOutlineContent) adaptableObject).getTreeElement() instanceof LinkableActionScriptTreeElement) {
-				late = (LinkableActionScriptTreeElement) ((IFlexPackageExplorerASOutlineContent) adaptableObject).getTreeElement();
+				definition = getDefinition((LinkableActionScriptTreeElement) ((IFlexPackageExplorerASOutlineContent) adaptableObject).getTreeElement());
 			}
-		}else if(adaptableObject instanceof ITextSelection){
+		} else if (adaptableObject instanceof ITextSelection) {
+			IASNode node = getASNode((ITextSelection) adaptableObject);
+			if (node instanceof IDefinition) {
+				definition = (IDefinition) node;
+			} else if (node.getParent() instanceof IDefinition){
+				definition = (IDefinition) node.getParent();
+			}else{
+				//TODO: resolve function for selections from insode a function
+				System.out.println("found IASNode for TextSelection that isn't an IDefinition: " + node);
+			}
 
 		}
 
+		/*
+		 * filter for function-definitions only
+		 */
 		FBAsFunction result = null;
-		if(late != null){
-			IDefinition definition = ((IDefinitionLink) late.link).resolveLink();
-			if (definition instanceof IFunction)
-				result = new FBAsFunction((IFunction) definition);
-		}
+		if (definition instanceof IFunction)
+			result = new FBAsFunction((IFunction) definition);
 
+		/*
+		 * create requested type
+		 */
 		if (result != null) {
 			if (adapterType == IAsFunction.class) {
 				return result;
@@ -67,8 +91,32 @@ public class FBAdapterFactory implements IAdapterFactory {
 		return ADAPTER_TYPES;
 	}
 
+	private IDefinition getDefinition(LinkableActionScriptTreeElement late) {
+		if (late != null) {
+			return ((IDefinitionLink) late.link).resolveLink();
+		}
+		return null;
+	}
 
-	//TODO: how to get the current editor from here so we can transfer TextSelection to IAsNode
-	//public static
+	private IASNode getASNode(ITextSelection textSelection) {
+		if (textSelection != null) {
+			IPath path = Activator.getSharedInstance().getCurrentEditorInputPath();
+			if (path != null) {
+				synchronized (CMFactory.getLockObject()) {
+					IProject projectForFile = CMFactory.getManager().getProjectForFile(path);
+					if (projectForFile != null) {
+						IFileNode fileNode = projectForFile.findFileNodeInProject(path);
+						if (fileNode != null) {
+							ASOffsetInformation info = new ASOffsetInformation(textSelection.getOffset(), fileNode);
+							return info.getContainingNode();
+						}
+					}
+				}
+			}
+		}
+
+		return null;
+
+	}
 
 }
