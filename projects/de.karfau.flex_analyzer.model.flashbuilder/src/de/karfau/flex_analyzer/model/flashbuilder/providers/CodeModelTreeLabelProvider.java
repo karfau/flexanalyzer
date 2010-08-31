@@ -1,11 +1,11 @@
-package de.karfau.flex_analyzer.ui.views;
+package de.karfau.flex_analyzer.model.flashbuilder.providers;
 
 import org.eclipse.jface.viewers.LabelProvider;
 
 import de.karfau.flex_analyzer.model.IAsFunction;
-import de.karfau.flex_analyzer.ui.views.SVContentProvider.RootInputItem;
+import de.karfau.flex_analyzer.model.flashbuilder.providers.CodeModelTreeContentProvider.RootInputItem;;
 
-public class SVLabelProvider extends LabelProvider {
+public class CodeModelTreeLabelProvider extends LabelProvider {
 
 	@SuppressWarnings("unchecked")
 	@Override
