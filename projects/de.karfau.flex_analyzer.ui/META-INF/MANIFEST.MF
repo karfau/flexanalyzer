@@ -11,3 +11,4 @@ Require-Bundle: org.eclipse.ui;visibility:=reexport,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.karfau.flex_analyzer.ui.views
+Import-Package: com.adobe.flexbuilder.codemodel.tree

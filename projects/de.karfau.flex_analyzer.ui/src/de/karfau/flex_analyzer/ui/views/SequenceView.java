@@ -5,7 +5,9 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchPart;
@@ -35,6 +37,10 @@ public class SequenceView extends ViewPart implements ISelectionListener {
 		//treeViewer.setContentProvider(getModel().getTreeContentProvider());
 		createToolBar();
 
+		treeViewer = new TreeViewer(new Tree(parent, SWT.SINGLE));
+		treeViewer.setContentProvider(new SVContentProvider());
+		treeViewer.setLabelProvider(new SVLabelProvider());
+		
 		propSheetPage.createControl(parent);
 		//propSheetPage.setPropertySourceProvider(new FunctionPropertySourceProvider());
 		ISelectionService selServ = getSite().getWorkbenchWindow().getSelectionService();
