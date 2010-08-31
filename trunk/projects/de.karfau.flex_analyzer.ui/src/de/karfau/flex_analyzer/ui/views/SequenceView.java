@@ -38,8 +38,8 @@ public class SequenceView extends ViewPart implements ISelectionListener {
 		createToolBar();
 
 		treeViewer = new TreeViewer(new Tree(parent, SWT.SINGLE));
-		treeViewer.setContentProvider(new SVContentProvider());
-		treeViewer.setLabelProvider(new SVLabelProvider());
+		treeViewer.setContentProvider(getModel().getTreeContentProvider());
+		treeViewer.setLabelProvider(getModel().getTreeLabelProvider());
 		
 		propSheetPage.createControl(parent);
 		//propSheetPage.setPropertySourceProvider(new FunctionPropertySourceProvider());
