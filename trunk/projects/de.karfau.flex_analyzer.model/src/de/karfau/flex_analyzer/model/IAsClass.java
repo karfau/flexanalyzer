@@ -17,6 +17,11 @@ public interface IAsClass extends IAsResource{
 		public boolean equals(IAsResource other) { return other == IAsClass.VOID; }
 		@Override
 		public boolean isSourceAvailable() { return false;	}
+		@Override
+		public Object clone() {
+			return VOID;
+		}
+
 	};
 
 }

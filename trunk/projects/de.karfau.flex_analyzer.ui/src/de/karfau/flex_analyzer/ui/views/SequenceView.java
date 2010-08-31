@@ -62,7 +62,7 @@ public class SequenceView extends ViewPart implements ISelectionListener {
 		IAdapterFactory factory = Activator.getSharedInstance().getAdapterFactory();
 		if(factory != null){
 			IAsFunction input = (IAsFunction) factory.getAdapter(selection, IAsFunction.class);
-			System.out.println("transformed selection \n\tselection: "+selection+" to \n\t input: "+input);
+			System.out.println("transformed selection \n\tselection: "+selection+" to \n\tinput: "+input);
 			if(treeViewer != null)
 				treeViewer.setInput(input);
 

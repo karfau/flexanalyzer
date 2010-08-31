@@ -120,4 +120,9 @@ public class FBAsFunction extends AbstractResource implements IAsFunction {
 		return joinQualifiedNameParts(clazz == null ? null : clazz.getQualifiedName(), getName());
 	}
 
+	@Override
+	public Object clone() {
+		return new FBAsFunction(definition);
+	}
+
 }

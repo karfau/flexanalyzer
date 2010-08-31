@@ -7,18 +7,17 @@ import de.karfau.flex_analyzer.model.IAsClass;
 
 public class FBASClass extends AbstractClass implements IAsClass {
 
-
 	public FBASClass(String name, String packageName) {
 		setName(name);
 		this.packageName = packageName;
 	}
 
 	public FBASClass(String name) {
-		this(name,"");
+		this(name, "");
 	}
 
-	public FBASClass(IClass definition){
-		this(definition!= null?definition.getName():"nullClassDefinition",definition!= null?definition.getPackageName():"");
+	public FBASClass(IClass definition) {
+		this(definition != null ? definition.getName() : "nullClassDefinition", definition != null ? definition.getPackageName() : "");
 		this.definition = definition;
 	}
 
@@ -33,7 +32,7 @@ public class FBASClass extends AbstractClass implements IAsClass {
 
 	@Override
 	public String getQualifiedName() {
-		return joinQualifiedNameParts(packageName,getName());
+		return joinQualifiedNameParts(packageName, getName());
 	}
 
 	@Override
@@ -41,5 +40,9 @@ public class FBASClass extends AbstractClass implements IAsClass {
 		return definition != null;//TODO: BlockNode(IScopedNode) as child?
 	}
 
+	@Override
+	public Object clone() {
+		return new FBASClass(definition);
+	}
 
 }

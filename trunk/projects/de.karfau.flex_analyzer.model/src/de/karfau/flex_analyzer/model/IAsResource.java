@@ -8,5 +8,5 @@ public interface IAsResource {
 	boolean isSourceAvailable();
 	String getQualifiedName();
 	boolean equals( IAsResource other);
-
+	Object clone();
 }

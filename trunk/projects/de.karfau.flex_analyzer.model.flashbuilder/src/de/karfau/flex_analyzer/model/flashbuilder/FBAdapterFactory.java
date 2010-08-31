@@ -3,6 +3,7 @@ package de.karfau.flex_analyzer.model.flashbuilder;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.jface.viewers.ITreeSelection;
 import org.eclipse.ui.views.properties.IPropertySource;
 
 import com.adobe.flexbuilder.codemodel.common.CMFactory;
@@ -13,6 +14,7 @@ import com.adobe.flexbuilder.codemodel.project.IProject;
 import com.adobe.flexbuilder.codemodel.tree.ASOffsetInformation;
 import com.adobe.flexbuilder.codemodel.tree.IASNode;
 import com.adobe.flexbuilder.codemodel.tree.IFileNode;
+import com.adobe.flexbuilder.codemodel.tree.IIdentifierNode;
 import com.adobe.flexbuilder.editors.derived.ui.navigator.IFlexPackageExplorerASOutlineContent;
 import com.adobe.flexide.as.core.ui.outliner.LinkableActionScriptTreeElement;
 
@@ -44,9 +46,12 @@ public class FBAdapterFactory implements IAdapterFactory {
 		 */
 		IDefinition definition = null;
 
-		if (adaptableObject instanceof LinkableActionScriptTreeElement)
+		if(adaptableObject instanceof ITreeSelection && !(adaptableObject instanceof LinkableActionScriptTreeElement) && !(adaptableObject instanceof IFlexPackageExplorerASOutlineContent))
+			adaptableObject = ((ITreeSelection)adaptableObject).getFirstElement();
+
+		if (adaptableObject instanceof LinkableActionScriptTreeElement){
 			definition = getDefinition((LinkableActionScriptTreeElement) adaptableObject);
-		else if (adaptableObject instanceof IFlexPackageExplorerASOutlineContent) {
+		}else if (adaptableObject instanceof IFlexPackageExplorerASOutlineContent) {
 			if (((IFlexPackageExplorerASOutlineContent) adaptableObject).getTreeElement() instanceof LinkableActionScriptTreeElement) {
 				definition = getDefinition((LinkableActionScriptTreeElement) ((IFlexPackageExplorerASOutlineContent) adaptableObject).getTreeElement());
 			}
@@ -54,9 +59,11 @@ public class FBAdapterFactory implements IAdapterFactory {
 			IASNode node = getASNode((ITextSelection) adaptableObject);
 			if (node instanceof IDefinition) {
 				definition = (IDefinition) node;
-			} else if (node.getParent() instanceof IDefinition){
+			} else if (node.getParent() instanceof IIdentifierNode) {
+				definition = ((IIdentifierNode) node).getDefinition();
+			} else if (node.getParent() instanceof IDefinition) {
 				definition = (IDefinition) node.getParent();
-			}else{
+			} else {
 				//TODO: resolve function for selections from insode a function
 				System.out.println("found IASNode for TextSelection that isn't an IDefinition: " + node);
 			}
@@ -108,7 +115,7 @@ public class FBAdapterFactory implements IAdapterFactory {
 						IFileNode fileNode = projectForFile.findFileNodeInProject(path);
 						if (fileNode != null) {
 							ASOffsetInformation info = new ASOffsetInformation(textSelection.getOffset(), fileNode);
-							return info.getContainingNode();
+							return ((IIdentifierNode) (info.getContainingNode())).getDefinition();
 						}
 					}
 				}
