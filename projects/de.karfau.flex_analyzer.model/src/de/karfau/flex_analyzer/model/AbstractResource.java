@@ -44,4 +44,6 @@ public abstract class AbstractResource implements IAsResource {
 		return (first != null && first.length() > 0 ? first + QUALIFIED_NAME_DELIM : "") + second;
 	}
 
+	abstract public Object clone();
+
 }
