@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="test.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RCP Perspective"
+            class="test.Perspective"
+            id="Test.perspective">
+      </perspective>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="Test.application"
+            name="Test">
+         <property
+               name="windowImages"
+               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="test.View"
+            id="test.View"
+            name="View"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <view
+               closeable="true"
+               id="test.View"
+               minimized="false"
+               moveable="true"
+               ratio="0.95f"
+               relationship="top"
+               relative="org.eclipse.ui.editorss"
+               showTitle="true"
+               standalone="true"
+               visible="true">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="test.commands.AddPerson"
+            id="test.commands.AddPerson"
+            name="AddPerson">
+      </command>
+      <command
+            defaultHandler="test.commands.Print"
+            id="test.commands.Print"
+            name="Print">
+      </command>
+      <command
+            defaultHandler="test.commands.DeletePerson"
+            id="test.commands.DeletePerson"
+            name="DeletePerson">
+      </command>
+      <command
+            defaultHandler="test.commands.CopyPersonClipboard"
+            id="test.commands.CopyPersonClipboard"
+            name="CopyPersonClipboard">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="fileMenu2"
+               label="Testing">
+            <command
+                  commandId="test.commands.AddPerson"
+                  label="Add person"
+                  style="push"
+                  tooltip="Adds a person">
+            </command>
+            <command
+                  commandId="test.commands.Print"
+                  label="Print"
+                  style="push"
+                  tooltip="Prints content to console">
+            </command>
+            <command
+                  commandId="test.commands.DeletePerson"
+                  label="Delete person"
+                  style="push"
+                  tooltip="Deletes selected person">
+            </command>
+            <command
+                  commandId="test.commands.CopyPersonClipboard"
+                  label="Copy person to clipboard"
+                  style="push"
+                  tooltip="Copies selected person to clipboard">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+
+</plugin>
