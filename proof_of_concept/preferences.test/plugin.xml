@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="preferences.test.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RCP Perspective"
+            class="preferences.test.Perspective"
+            id="PreferencesTest.perspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="preferences.test.page.preferencepage1.MyPreferencePage1"
+            id="preferences.test.page.preferencepage1"
+            name="MyPreference Page">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="fileMenu"
+               label="File">
+            <command
+                  commandId="org.eclipse.ui.window.preferences"
+                  label="Preferences"
+                  style="push">
+            </command>
+            <command
+                  commandId="preferences.test.page.handler.ShowPreferenceValues"
+                  label="Show Preference Values"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="preferences.test.page.handler.ShowPreferenceValues"
+            id="preferences.test.page.handler.ShowPreferenceValues"
+            name="ShowPreferenceValues">
+      </command>
+   </extension>
+
+</plugin>
