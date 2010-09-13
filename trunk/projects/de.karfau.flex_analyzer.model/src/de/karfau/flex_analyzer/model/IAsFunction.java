@@ -9,4 +9,6 @@ public interface IAsFunction extends IAsResource {
 
 	String getAccessType();
 
+	public Object[] getExpressions();
+
 }
