@@ -3,6 +3,7 @@ package de.karfau.flex_analyzer.model.flashbuilder.providers;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
+import de.karfau.flex_analyzer.model.IAsExpression;
 import de.karfau.flex_analyzer.model.IAsFunction;
 
 public class CodeModelTreeContentProvider implements ITreeContentProvider {
@@ -11,11 +12,18 @@ public class CodeModelTreeContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		// TODO Auto-generated method stub
 		Object[] elems = new Object[0];
+		IAsFunction function = null;
 		if (parentElement instanceof RootInputItem<?>) {
-			IAsFunction node = (IAsFunction) rootInput.getInput();
-			elems = new Object[] { node.getName(), node.getQualifiedName() };
+			function = (IAsFunction) rootInput.getInput();
+		}else if(parentElement instanceof IAsFunction){
+			function = (IAsFunction)parentElement;
+		}
+		if(function != null){
+			elems = function.getExpressions();
+		}else if(parentElement instanceof IAsExpression){
+			IAsExpression expression = (IAsExpression)parentElement;
+			elems = expression.getChildren();
 		}
 		return elems;
 	}
@@ -28,8 +36,10 @@ public class CodeModelTreeContentProvider implements ITreeContentProvider {
 
 	@Override
 	public boolean hasChildren(Object element) {
-		// TODO Auto-generated method stub
-		return element instanceof IAsFunction || element instanceof RootInputItem<?>;
+		boolean result = getChildren(element).length>0;//element instanceof RootInputItem<?>;
+//		if(!result)
+//			result = element instanceof IAsFunction && ((IAsFunction)element).isSourceAvailable();
+		return result;
 	}
 
 	@Override

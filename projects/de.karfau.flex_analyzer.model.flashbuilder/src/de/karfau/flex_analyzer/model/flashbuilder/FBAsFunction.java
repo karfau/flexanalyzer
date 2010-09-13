@@ -5,6 +5,7 @@ import com.adobe.flexbuilder.codemodel.definitions.IFunction;
 import com.adobe.flexbuilder.codemodel.definitions.IPackage;
 import com.adobe.flexbuilder.codemodel.tree.IASNode;
 import com.adobe.flexbuilder.codemodel.tree.IExpressionNode;
+import com.adobe.flexbuilder.codemodel.tree.IScopedNode;
 
 import de.karfau.flex_analyzer.model.AbstractResource;
 import de.karfau.flex_analyzer.model.AccessModifiers;
@@ -57,6 +58,8 @@ public class FBAsFunction extends AbstractResource implements IAsFunction {
 	private IAsClass returnType;
 	private String accessModifier;
 
+	private IScopedNode sourceBlock;
+
 	public FBAsFunction(IAsClass clazz, AccessModifiers accessModifier, String name/*, IAsVariable[] parameters*/, IAsClass returnType) {
 		this(clazz, accessModifier.toString(), name, returnType);
 	}
@@ -79,6 +82,12 @@ public class FBAsFunction extends AbstractResource implements IAsFunction {
 	public FBAsFunction(IFunction definition) {
 		this(classForFunctionDefinition(definition), definition.getNamespace(), definition.getName(), returnTypeForFunctionDefinition(definition));
 		this.definition = definition;
+
+		for(int i=definition.getChildCount();--i > 0;){
+			if(definition.getChild(i) instanceof IScopedNode){
+				this.sourceBlock = (IScopedNode)definition.getChild(i);
+			}
+		}
 	}
 
 	public FBAsFunction() {
@@ -124,5 +133,23 @@ public class FBAsFunction extends AbstractResource implements IAsFunction {
 	public Object clone() {
 		return new FBAsFunction(definition);
 	}
+
+	@Override
+	public boolean isSourceAvailable() {
+		return sourceBlock != null;
+	}
+
+	public Object[] getExpressions(){
+		Object[] result = null;
+		if(isSourceAvailable()){
+			result = new Object[sourceBlock.getChildCount()];
+			for(int i = 0;i<sourceBlock.getChildren().length;i++){
+				result[i] = new FBAsExpression(sourceBlock.getChild(i));
+			}
+		}
+		return result;
+	}
+
+
 
 }
